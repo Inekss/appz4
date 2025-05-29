@@ -5,23 +5,22 @@ namespace appz_4.DAL.entities;
 public class Dish
 {
     [Key]
-    public int Id { get; set; }               // Унікальний ідентифікатор страви
+    public int Id { get; set; }
 
     [Required]
     [MaxLength(100)]
-    public string Name { get; set; }          // Назва страви
+    public string Name { get; set; }
 
     [MaxLength(500)]
-    public string Description { get; set; }   // Опис страви (опційно)
+    public string Description { get; set; }
 
-    public decimal Price { get; set; }        // Ціна
+    public decimal Price { get; set; }
 
-    public DishType DishType { get; set; }        // Тип страви (наприклад, Суп, Гарнір, Основна страва)
+    public DishType DishType { get; set; }
 
     public ICollection<MenuItem> MenuItems { get; set; } = new List<MenuItem>();
 }
 
-// Перелік типів страв (можна зберігати в базі як enum)
 public enum DishType
 {
     Starter,

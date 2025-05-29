@@ -16,5 +16,5 @@ public class MenuItem
     public int DishId { get; set; }
     public Dish Dish { get; set; }
 
-    public bool IsIncludedInComplex { get; set; }  // Чи входить у комплексний обід
+    public bool IsIncludedInComplex { get; set; }
 }

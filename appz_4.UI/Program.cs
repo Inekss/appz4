@@ -1,5 +1,6 @@
 ﻿
 using appz_4.BLL.interfaces;
+using appz_4.BLL.factories;
 using appz_4.BLL.services;
 using appz_4.DAL.context;
 using appz_4.DAL.entities;
@@ -15,7 +16,7 @@ internal class Program
             // Налаштування DI та DbContext
             var services = new ServiceCollection();
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseInMemoryDatabase("LunchDb")); // або UseSqlServer(...) для SQL
+                options.UseInMemoryDatabase("LunchDb"));
 
             services.AddScoped<IMenuService, MenuService>();
 
@@ -131,13 +132,15 @@ internal class Program
         {
             if (!context.Dishes.Any())
             {
+                IDishFactory dishFactory = new StarterDishFactory();
+
                 var dishes = new List<Dish>
                 {
-                    new Dish { Name = "Борщ", Description = "Традиційний український суп", Price = 50, DishType = DishType.Starter },
-                    new Dish { Name = "Картопляне пюре", Description = "З вершковим маслом", Price = 30, DishType = DishType.SideDish },
-                    new Dish { Name = "Котлета по-київськи", Description = "Класична страва", Price = 80, DishType = DishType.MainCourse },
-                    new Dish { Name = "Салат Олів'є", Description = "Салат з овочами та ковбасою", Price = 35, DishType = DishType.Salad },
-                    new Dish { Name = "Компот", Description = "Фруктовий напій", Price = 20, DishType = DishType.Drink }
+                    dishFactory.CreateDish("Борщ", "Традиційний український суп", 50, DishType.Starter),
+                    dishFactory.CreateDish("Картопляне пюре", "З вершковим маслом", 30, DishType.SideDish),
+                    dishFactory.CreateDish("Котлета по-київськи", "Класична страва", 80, DishType.MainCourse),
+                    dishFactory.CreateDish("Салат Олів'є", "Салат з овочами та ковбасою", 35, DishType.Salad),
+                    dishFactory.CreateDish("Компот", "Фруктовий напій", 20, DishType.Drink)
                 };
 
                 context.Dishes.AddRange(dishes);

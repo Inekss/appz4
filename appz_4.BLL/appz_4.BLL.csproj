@@ -10,8 +10,4 @@
       <ProjectReference Include="..\appz_4.DAL\appz_4.DAL.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="factories\" />
-    </ItemGroup>
-
 </Project>

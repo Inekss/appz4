@@ -8,7 +8,7 @@ public class DayMenu
     public int Id { get; set; }
 
     [Required]
-    public DateOnly Date { get; set; }   // День тижня або дата
+    public DateOnly Date { get; set; }
 
     public ICollection<MenuItem> MenuItems { get; set; } = new List<MenuItem>();
 }
