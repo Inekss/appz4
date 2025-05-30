@@ -1,13 +1,12 @@
-﻿using appz_4.DAL.entities;
+﻿using appz_4.BLL.DTO;
 
 namespace appz_4.BLL.interfaces;
 
 public interface IMenuService
 {
-    Task<IEnumerable<Dish>> GetDishesByDateAsync(DateOnly date);
-    Task<IEnumerable<Dish>> GetComplexLunchDishesAsync(DateOnly date);
-    Task<IEnumerable<Dish>> GetAvailableDishesAsync(DateOnly date);
+    Task<IEnumerable<DishDto>> GetComplexLunchDishesAsync(DateOnly date);
     Task<bool> AddDishToDayMenuAsync(DateOnly date, int dishId, bool includeInComplex);
     Task<bool> RemoveDishFromDayMenuAsync(DateOnly date, int dishId);
-    Task<IEnumerable<Dish>> GetAllDishesAsync();
+    Task<IEnumerable<DishDto>> GetAllDishesAsync();
+    Task<DayMenuDto?> GetDayMenuByDateAsync(DateOnly date);
 }
