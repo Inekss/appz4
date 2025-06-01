@@ -9,4 +9,5 @@ public interface IMenuService
     Task<bool> RemoveDishFromDayMenuAsync(DateOnly date, int dishId);
     Task<IEnumerable<DishDto>> GetAllDishesAsync();
     Task<DayMenuDto?> GetDayMenuByDateAsync(DateOnly date);
+    Task<bool> UpdateDishAsync(int dishId, DishDto updatedDish);
 }
