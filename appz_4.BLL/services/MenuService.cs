@@ -88,4 +88,24 @@ public class MenuService : IMenuService
 
         return dayMenu == null ? null : _mapper.Map<DayMenuDto>(dayMenu);
     }
+    public async Task<bool> UpdateDishAsync(int dishId, DishDto updatedDish)
+    {
+        var dish = await _unitOfWork.Dishes.GetByIdAsync(dishId);
+        if (dish == null)
+            return false;
+
+        dish.Name = updatedDish.Name;
+        dish.Description = updatedDish.Description;
+        dish.Price = updatedDish.Price;
+
+        // перетворення string -> DishType
+        if (!Enum.TryParse<DishType>(updatedDish.DishType, out var parsedDishType))
+            return false;
+
+        dish.DishType = parsedDishType;
+
+        _unitOfWork.Dishes.Update(dish);
+        await _unitOfWork.SaveChangesAsync();
+        return true;
+    }
 }
