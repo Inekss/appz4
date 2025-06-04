@@ -125,7 +125,7 @@ internal class Program
         var date = PromptForDate("Введіть дату (рррр-мм-дд): ");
         var response = await _httpClient.GetAsync($"/daymenu/{date:yyyy-MM-dd}/complex");
 
-        if (!response.IsSuccessStatusCode)
+        if (!response.IsSuccessStatusCode){
         }
 
         var content = await response.Content.ReadAsStringAsync();
