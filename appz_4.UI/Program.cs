@@ -126,9 +126,6 @@ internal class Program
         var response = await _httpClient.GetAsync($"/daymenu/{date:yyyy-MM-dd}/complex");
 
         if (!response.IsSuccessStatusCode)
-        {
-            Console.WriteLine("Помилка при отриманні комплексного обіду.");
-            return;
         }
 
         var content = await response.Content.ReadAsStringAsync();
@@ -164,7 +161,7 @@ internal class Program
         
         var url = $"/daymenu/{date:yyyy-MM-dd}/dish/{dishId}?includeInComplex={includeInComplex.ToString().ToLower()}";
 
-        var response = await _httpClient.PostAsync(url, null); // Тіло запиту не потрібне
+        var response = await _httpClient.PostAsync(url, null);
 
         Console.WriteLine(response.IsSuccessStatusCode
             ? "Страву додано до меню."
@@ -181,8 +178,7 @@ internal class Program
             Console.WriteLine("Невірний формат ID.");
             return;
         }
-
-        // Формуємо URL з параметрами маршруту
+        
         var url = $"/daymenu/{date:yyyy-MM-dd}/dish/{dishId}";
 
         var request = new HttpRequestMessage(HttpMethod.Delete, url);
